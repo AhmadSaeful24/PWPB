@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .nav {
+            background: gray;
+            color: white;
+        }
+    </style>
+    <div>
+        <div class="nav">
+            <h3 style="margin-top: 5px; margin-left: 20px; font-family: cursive;">Afacyaa Store</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row grid gap-3 mt-3">
+            <% for(let a of barang) { %>
+            <div class="card" style="width: 18rem;">
+                <img src="/upload/<%= a.image %>" class="card-img-top h-50 w-100" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%= a.Nama_barang %></h5>
+                    <h5>Harga : <%= uang(a.harga) %></h5>
+                    <p class="card-text">Stock : <%= a.new_stock %></p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+</body>
+
+</html>

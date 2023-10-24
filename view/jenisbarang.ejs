@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="container mt-5">
+          <table class="table table-dark table-striped">
+            <tr>
+              <td>Id</td>
+              <td>Jenis Barang</td>
+              <td>Pilih</td>
+            <td>Action</td>
+        </tr>
+        <% for(let a of jenis){ %>
+        <tr>
+            <td> <%= a.id_JenisBarang %> </td>
+            <td><%= a.JenisBarang %></td>
+            <td>
+                <a href="/pilih/<%= a.id_JenisBarang %>" class="badge bg-success">Pilih</a>
+            </td>
+            <td>
+            <% if(user) { %>
+              <% if(user.role == 1) { %>
+                  <button type="button" class="badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="edit('<%= a.JenisBarang %>','<%= a.id_JenisBarang %>')">
+                    Edit
+                  </button>
+                  
+                  <a href="/hapusJenis/<%= a.id_JenisBarang %>" class="badge bg-danger" onclick="return confirm('Apakah Serius?')">Hapus</a>
+                <% } %>
+              <% } %>
+                  
+            </td>
+          </tr>
+          <% } %>
+        </table>
+        <% if(user) { %>
+          <% if(user.role == 1) { %>
+            <button style="margin-left: 33rem;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Tambah Jenis Barang
+            </button>
+          <% } %>
+        <% } %>
+    </div>
+    
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="tambahJenis" method="post">
+            Masukan Jenis Barang
+            <input type="text" id="Jenis" name="Jenis" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button></form>
+        </div>
+    </div>
+    </div>
+  </div>
+  
+  <!-- modal2 -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit jenis barang</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/editJenis" method="post">
+            <input type="text" id="JenisBarang" name="JenisBarang" class="form-control">
+            <input type="text" hidden id="id_JenisBarang" name="id_JenisBarang" class="form-control">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button></form>
+        </div>
+    </div>
+    </div>
+  </div>
+<script>
+  const edit =(Jenis,id)=>{
+    console.log(Jenis,id)
+    document.getElementById('JenisBarang').value = Jenis
+    document.getElementById('id_JenisBarang').value = id
+  }
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
